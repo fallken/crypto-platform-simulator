@@ -11,7 +11,7 @@ const schema = new Schema(
     password: String,
     capital: Number,
     divisa: String,
-    prefered_cryptocurrency: String,
+    preferedCryptocurrency: String,
   },
   {
     timestamps: true,

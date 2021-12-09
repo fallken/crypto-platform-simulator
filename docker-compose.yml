@@ -13,7 +13,7 @@ services:
       - mongodb:/data/db
    backend:
     container_name: back-end-express
-    command: sh -c "npm run dev"
+    command: sh -c "npm run seed && npm run dev"
     restart: always 
     depends_on:
       - mongo

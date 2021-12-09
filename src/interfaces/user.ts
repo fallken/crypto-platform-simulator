@@ -10,7 +10,7 @@ export interface UserInterface extends mongoose.Document {
   password: string;
   capital: number;
   divisa: string;
-  prefered_cryptocurrency: string;
-  favorites?: [ Partial<FavoriteInterface> ];
-  simulators?: [ Partial<SimulatorInterface> ];
+  preferedCryptocurrency: string;
+  createdAt: Date,
+  updatedAt: Date,
 }

@@ -38,7 +38,15 @@ export const registerUser = async (
   next: NextFunction
 ): Promise<any> => {
   try {
-    let user = await UserService.createUser(req.body);
+
+    const data=req.body,userData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      preferedCryptocurrency: data.prefered_cryptocurrency,
+      nickname: data.nickname ?? undefined ,
+    }
+    let user = await UserService.createUser(userData);
 
     return new ResponseHandler(user).send(res);
   } catch (err) {

@@ -14,4 +14,6 @@ export interface SimulatorInterface extends mongoose.Document {
     cryptoPriceStart: number,
     cryptoPriceCheck: number,
     user?: mongoose.Types.ObjectId | Partial<UserInterface>,
+    createdAt: Date,
+    updatedAt: Date,
 };

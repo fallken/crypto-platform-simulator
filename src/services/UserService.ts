@@ -44,7 +44,6 @@ export class UserService {
         HttpCodes.FORBIDDEN,
       );
     }
-
     user = await User.create(userData);
 
     return user;

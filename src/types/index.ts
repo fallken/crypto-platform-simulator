@@ -23,6 +23,7 @@ export type userRegisterInput = {
     name: string,
     email: string ,
     password: string ,
+    preferedCryptocurrency: string ,
     nickname?: string ,
 }
 

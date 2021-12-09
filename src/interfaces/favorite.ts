@@ -3,11 +3,8 @@ import { UserInterface } from ".";
 
 export interface FavoriteInterface extends mongoose.Document {
     _id: mongoose.Types.ObjectId,
-    nickname: string,
-    email: string,
-    capital: number,
-    divisa: string,
-    prefered_cryptocurrency: string,
-
+    name: string,
     user: mongoose.Types.ObjectId | Partial<UserInterface>,
+    createdAt: Date,
+    updatedAt: Date,
 };
