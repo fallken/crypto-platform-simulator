@@ -5,7 +5,7 @@ import { ValidatorErrorObject } from "../types";
 import ResponseHandler from "../utils/HttpUtil";
 
 
-export const validate = (validation_schema: Array<ValidationChain>) => {
+export const validateRequest = (validation_schema: Array<ValidationChain>) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         await Promise.all(validation_schema.map(async (item: ValidationChain) => {
             await item.run(req);

@@ -7,6 +7,7 @@ export interface UserInterface extends mongoose.Document {
   name: string;
   nickname: string;
   email: string;
+  password: string;
   capital: number;
   divisa: string;
   prefered_cryptocurrency: string;

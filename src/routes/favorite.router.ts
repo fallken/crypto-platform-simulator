@@ -1,20 +1,19 @@
 import express from "express";
-import { Favorite } from "../models/Favorite";
+import {
+  getAllFavoriteItems,
+  addUserFavorite,
+} from "../controllers/FavoriteController";
+import { validateRequest } from "../middlewares";
+import jwtTokenAuth from "../middlewares/JwtTokenAuth";
+import { addFavorite } from "../validation-schema/favorite";
 
 export const router = express.Router();
 
-router.get("/api/favorite", async (req, res) => {
-  const favorite = await Favorite.find().lean();
-  console.log(favorite);
-  res.json({ favorite });
-});
+router.get("/", jwtTokenAuth, getAllFavoriteItems);
 
-router.get("/api/favorite/:profile_id", async (req, res) => {
-  console.log(req.params);
-  let query = {};
-  const { profile_id } = req.params;
-  query = { profile_id };
-  console.log(query);
-  const data = await Favorite.find(query);
-  res.json(data);
-});
+router.post(
+  "/add",
+  jwtTokenAuth,
+  validateRequest(addFavorite),
+  addUserFavorite
+);

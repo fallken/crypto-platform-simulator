@@ -3,7 +3,7 @@ import ResponseHandler from "../utils/HttpUtil";
 import jwt from "jsonwebtoken";
 import * as config from "../config";
 import { HttpCodes, httResponse } from "../constants";
-import { UserService } from "../services/User";
+import { UserService } from "../services/UserService";
 import mongoose from "mongoose";
 import { JwtPayload } from "../types";
 import { UserRequestInterface } from "../interfaces";

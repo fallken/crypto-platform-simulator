@@ -1,24 +1,19 @@
 import express from "express";
-import { User } from "../models/User";
+import { getUserFavorites } from "../controllers/FavoriteController";
+import { getUserSimulators } from "../controllers/SimulatorController";
+import { getUserProfile, loginUser, registerUser } from "../controllers/UserController";
+import { validateRequest } from "../middlewares";
+import jwtTokenAuth from "../middlewares/JwtTokenAuth";
+import { userLogin, userRegister } from "../validation-schema/user";
 
 export var router = express.Router();
 
-router.get("/api/profile", async (req, res) => {
-  var profile = await User.find().lean();
-  console.log(profile);
-  res.json({ profile });
-});
+router.get("/profile", jwtTokenAuth, getUserProfile);
 
-router.post("/api/profile", async (req, res) => {
-  var { email, name, nickname } = req.body;
+router.post("/login", validateRequest(userLogin) , loginUser);
 
-  let profile = await User.findOne({
-    $or: [{ email }, { nickname }],
-  }).exec();
+router.post("/register", validateRequest(userRegister) , registerUser);
 
-  if (!profile) {
-    profile = await User.create({ name, email, nickname });
-  }
+router.get("/favorites", jwtTokenAuth, getUserFavorites);
 
-  res.json(profile);
-});
+router.get("/simulators", jwtTokenAuth, getUserSimulators);

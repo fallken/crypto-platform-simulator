@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { UserCollectionName } from ".";
+import { SimulatorInterface } from "../interfaces/simulator";
 
 const { Schema } = mongoose;
 
@@ -23,4 +24,4 @@ const schema = new Schema(
 
 export const SimulatorCollectionName = "Simulator";
 
-export const Simulator = mongoose.model(SimulatorCollectionName, schema);
+export const Simulator = mongoose.model<SimulatorInterface>(SimulatorCollectionName, schema);

@@ -28,19 +28,17 @@ import { DBURL } from "../config";
 
   const simulator = new Simulator({
     profile_id: idProfile,
-    name: `String`,
     start_date: `01/05/2021`,
     check_date: `01/05/2021`,
     cryptocurrency: `String`,
     divisa: `String`,
-    Crypto_price_start: `123`,
-    Crypto_price_check: `123`,
+    crypto_price_start: `123`,
+    crypto_price_check: `123`,
   });
   await simulator.save();
 
   const favorite = new Favorite({
     profile_id: idProfile,
-    name: `String`,
     favorite1: `String`,
     favorite2: `String`,
     favorite3: `String`,

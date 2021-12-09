@@ -32,11 +32,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({ origin: CORS_ORIGINS }));
 
 //routes 
-app.use(favoriteRouter);
+app.use("/api/favorite" , favoriteRouter);
 
-app.use(userRouter);
+app.use("/api/user" , userRouter);
 
-app.use(simulatorRouter);
+app.use("/api/simulator" , simulatorRouter);
 
 //if not routes were found
 app.use(routeNotFound);
