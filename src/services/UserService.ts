@@ -9,15 +9,14 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as config from "../config";
 
-
 export class UserService {
   /**
    * @param  {mongoose.Types.ObjectId} id
    * @returns Promise
    */
   static async getById(id: mongoose.Types.ObjectId): Promise<UserInterface> {
-    const query = { id };
-    let user = await User.findOne(query, { password: 0 });
+    const query = { _id:id };
+    let user = await User.findOne(query, { password: 0 }).populate('user');
 
     return user;
   }
@@ -40,10 +39,10 @@ export class UserService {
     let user = await User.findOne(query);
 
     if (user) {
-      throw new UserExistsException({
-        code: HttpCodes.FORBIDDEN,
-        message: "User with same Email already registered",
-      });
+      throw new UserExistsException(
+        "User with same Email already registered",
+        HttpCodes.FORBIDDEN,
+      );
     }
 
     user = await User.create(userData);
@@ -62,19 +61,18 @@ export class UserService {
     let user = await User.findOne(query);
 
     if (!user) {
-      throw new UserInvalidCredentialsException({
-        code: HttpCodes.UNAUTHORIZED,
-        msg: "The email or password is incorrect",
-      });
+      throw new UserInvalidCredentialsException(
+        "The email or password is incorrect",
+        HttpCodes.UNAUTHORIZED
+      );
     }
-
     const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
-      throw new UserInvalidCredentialsException({
-        code: HttpCodes.UNAUTHORIZED,
-        msg: "The email or password is incorrect",
-      });
+      throw new UserInvalidCredentialsException(
+        "The email or password is incorrect",
+        HttpCodes.UNAUTHORIZED
+      );
     }
 
     return user;
@@ -86,11 +84,12 @@ export class UserService {
    */
   static addJwtValidToken(uid, expiresIn = "365d"): string {
     const payload = {
-      uid,
-    },options = {
-      expiresIn,
-    };
-    const jwtToken:string = jwt.sign(payload,config.JWT_SECRET,options);
+        uid,
+      },
+      options = {
+        expiresIn,
+      };
+    const jwtToken: string = jwt.sign(payload, config.JWT_SECRET, options);
 
     return jwtToken;
   }

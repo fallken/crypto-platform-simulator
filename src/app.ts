@@ -9,21 +9,12 @@ import cors = require('cors');
 import { errorHandler } from './middlewares/ErrorHandler';
 import { ExpressError } from './interfaces';
 import {  NextFunction, Response ,Request} from "express";
-import { CORS_ORIGINS, DBURL, ENVIRONMENT } from './config';
-import mongoose from "mongoose";
+import { CORS_ORIGINS } from './config';
 
-mongoose
-  .connect(`${DBURL}`, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log(`Connected to DB ${DBURL}`);
-  }).catch(err=>{
-    console.log(`Error connecting ${DBURL}`);
-    throw(err);
- });
 
 const app: Application = express();
 
-app.use(morgan(ENVIRONMENT));
+app.use(morgan("tiny"));
 // support application/json type post data
 app.use(bodyParser.json());
 // support application/x-www-form-urlencoded post data

@@ -14,9 +14,13 @@ export const getAllFavoriteItems = async (
   res: Response,
   next: NextFunction
 ): Promise<any> => {
-  let favoriteItems = await FavoriteService.getAll();
+  try {
+    let favoriteItems = await FavoriteService.getAll();
 
-  return new ResponseHandler({ items: favoriteItems }).send(res);
+    return new ResponseHandler({ items: favoriteItems }).send(res);
+  } catch (err) {
+    next(err);
+  }
 };
 
 /**
@@ -28,31 +32,36 @@ export const getAllFavoriteItems = async (
 export const getUserFavorites = async (
   req: UserRequestInterface,
   res: Response,
+  next: NextFunction
 ): Promise<any> => {
-  let userFavoriteItems = await req.user.populate({
-    path: "favorites",
-    select: {
-      name: 1,
-    },
-  });
+  try {
+    let userFavoriteItems = await FavoriteService.getUserFavorites(req.uid);
 
-  return new ResponseHandler({ items: userFavoriteItems }).send(res);
+    return new ResponseHandler({ items: userFavoriteItems }).send(res);
+  } catch (err) {
+    next(err);
+  }
 };
-
 
 /**
  * @param  {UserRequestInterface} req
  * @param  {Response} res
+ * @param  {NextFunction} next
  * @returns Promise
  */
 export const addUserFavorite = async (
   req: UserRequestInterface,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<any> => {
-  let userFavorite = await FavoriteService.add({
-    user: req.uid,
-    ...req.body,
-  });
+  try {
+    let userFavorite = await FavoriteService.add({
+      user: req.uid,
+      ...req.body,
+    });
 
-  return new ResponseHandler(userFavorite).send(res);
+    return new ResponseHandler(userFavorite).send(res);
+  } catch (err) {
+    next(err);
+  }
 };

@@ -16,7 +16,7 @@ export type ValidatorErrorObject = {
 }
 
 export type JwtPayload = {
-    _id: string,
+    uid: string,
 }
 
 export type userRegisterInput = {
@@ -33,12 +33,16 @@ export type userLoginInput = {
 
 export type addSimulatorInput = {
     user: mongoose.Types.ObjectId,
-    start_date: Date,
-    check_date: Date,
+    name: string,
+    startDate: Date,
+    checkDate: Date,
+    price: number,
+    quantity: number,
+    currency: string,
     cryptocurrency: string,
     divisa: string,
-    crypto_price_start: number,
-    crypto_price_check: number,
+    cryptoPriceStart: number,
+    cryptoPriceCheck: number,
 }
 
 export type addFavoriteInput = {

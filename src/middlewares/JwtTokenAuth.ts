@@ -17,13 +17,12 @@ const jwtTokenAuth = async (
     let auth_header = req.header("Authorization");
 
     if (!auth_header) {
-      throw new Error("validated token user not found ");
+      throw new Error("no token passed in request header");
     }
     const token = auth_header.replace("Bearer ", "");
     const data = jwt.verify(token, config.JWT_SECRET) as JwtPayload;
-
     const user = await UserService.getById(
-      new mongoose.Types.ObjectId(data._id)
+      new mongoose.Types.ObjectId(data.uid)
     );
 
     if (!user) {
@@ -31,7 +30,7 @@ const jwtTokenAuth = async (
     }
 
     req.user = user;
-    req.uid = data._id;
+    req.uid = user._id;
 
     next();
   } catch (err) {

@@ -15,16 +15,20 @@ services:
     container_name: back-end-express
     command: sh -c "npm run dev"
     restart: always 
+    depends_on:
+      - mongo
     build: 
-        context: .
+        context: ./
         dockerfile: dockerfile
+    volumes:
+      - ./src:/usr/src/app/src
     ports:
       - 3000:3000
-    volumes:
-      - .:/home/node/app
    mongo_express:
     container_name: mongo_gui
     image: mongo-express
+    depends_on:
+      - mongo
     logging:
       driver: none
     links:

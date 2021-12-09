@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { NextFunction, Response } from "express";
 import { UserRequestInterface } from "../interfaces";
 import { SimulatorService } from "../services/SimulatorService";
 import ResponseHandler from "../utils/HttpUtil";
@@ -11,10 +11,15 @@ import ResponseHandler from "../utils/HttpUtil";
 export const getAllSimulatorItems = async (
   req: UserRequestInterface,
   res: Response,
+  next: NextFunction
 ): Promise<any> => {
-  let simulatorItems = await SimulatorService.getAll();
+  try {
+    let simulatorItems = await SimulatorService.getAll();
 
-  return new ResponseHandler({ items: simulatorItems }).send(res);
+    return new ResponseHandler({ items: simulatorItems }).send(res);
+  } catch (err) {
+    next(err);
+  }
 };
 
 /**
@@ -23,33 +28,47 @@ export const getAllSimulatorItems = async (
  * @returns Promise
  */
 export const getUserSimulators = async (
-    req: UserRequestInterface,
-    res: Response,
-  ): Promise<any> => {
-    let userSimulatorItems = await req.user.populate({
-        path: "simulators",
-        select: {
-            user: 0
-        }
-    });
-  
-    return new ResponseHandler({ items: userSimulatorItems }).send(res);
-  };
+  req: UserRequestInterface,
+  res: Response,
+  next: NextFunction
+): Promise<any> => {
+  try {
+    let userSimulatorItems = await SimulatorService.getUserSimulators(req.uid);
 
-  
+    return new ResponseHandler({ items: userSimulatorItems }).send(res);
+  } catch (err) {
+    next(err);
+  }
+};
+
 /**
  * @param  {UserRequestInterface} req
  * @param  {Response} res
  * @returns Promise
  */
 export const addUserSimulator = async (
-    req: UserRequestInterface,
-    res: Response,
-  ): Promise<any> => {
+  req: UserRequestInterface,
+  res: Response,
+  next: NextFunction
+): Promise<any> => {
+  try {
+    const data = req.body;
     let simulator = await SimulatorService.add({
-        user: req.uid,
-        ...req.body
+      user: req.uid,
+      name: data.name,
+      cryptocurrency: data.cryptocurrency,
+      currency: data.currency,
+      divisa: data.divisa,
+      price: data.price,
+      quantity: data.quantity,
+      cryptoPriceStart: data.crypto_price_start,
+      cryptoPriceCheck: data.crypto_price_check,
+      startDate: data.start_date,
+      checkDate: data.check_date,
     });
-  
+
     return new ResponseHandler(simulator).send(res);
-  };
+  } catch (err) {
+    next(err);
+  }
+};

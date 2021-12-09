@@ -6,11 +6,16 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
   {
-    dateRecorded: Date,
     cryptocurrency: String,
-    euros: Number,
+    name: String,
+    currency: String,
+    divisa: String,
     price: Number,
     quantity: Number,
+    cryptoPriceStart: Number,
+    cryptoPriceCheck: Number,
+    startDate:Date,
+    checkDate:Date,
 
     user: {
       type: mongoose.Schema.Types.ObjectId,

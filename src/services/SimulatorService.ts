@@ -35,4 +35,18 @@ export class SimulatorService {
     return simulator;
   }
 
+  /**
+   * @param  {mongoose.Types.ObjectId} uid
+   * @returns Promise
+   */
+  static async getUserSimulators(
+    uid: mongoose.Types.ObjectId
+  ): Promise<LeanDocument<SimulatorInterface>[]> {
+    const query = {
+      user: uid,
+    };
+    let favorites = await Simulator.find(query,{ user: 0 }).lean();
+
+    return favorites;
+  }
 }

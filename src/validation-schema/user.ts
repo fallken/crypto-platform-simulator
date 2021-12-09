@@ -24,9 +24,6 @@ export const userLogin: Array<ValidationChain> = [
       .isLength({ min: 6, max: 32 })
       .not()
       .isEmpty()
-      .trim()
-      .customSanitizer((password) => {//converting the password to hash before going forward
-         return bcrypt.hash(password, 8);
-      }),
+      .trim(),
   ];
   

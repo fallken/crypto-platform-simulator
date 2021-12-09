@@ -19,4 +19,4 @@ const schema = new Schema(
 
 export const FavoriteCollectionName = "Favorite";
 
-export const Favorite = mongoose.model<FavoriteInterface>(FavoriteCollectionName, schema);
+export const Favorite = mongoose.model<FavoriteInterface>(FavoriteCollectionName, schema,);
