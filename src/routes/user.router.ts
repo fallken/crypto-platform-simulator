@@ -1,10 +1,10 @@
 import express from "express";
-import { Profile } from "../models/Profile";
+import { User } from "../models/User";
 
 export var router = express.Router();
 
 router.get("/api/profile", async (req, res) => {
-  var profile = await Profile.find().lean();
+  var profile = await User.find().lean();
   console.log(profile);
   res.json({ profile });
 });
@@ -12,12 +12,12 @@ router.get("/api/profile", async (req, res) => {
 router.post("/api/profile", async (req, res) => {
   var { email, name, nickname } = req.body;
 
-  let profile = await Profile.findOne({
+  let profile = await User.findOne({
     $or: [{ email }, { nickname }],
   }).exec();
 
   if (!profile) {
-    profile = await Profile.create({ name, email, nickname });
+    profile = await User.create({ name, email, nickname });
   }
 
   res.json(profile);

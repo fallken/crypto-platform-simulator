@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import _ from "lodash";
-import { Profile } from "../models/Profile";
+import { User } from "../models";
 import { Simulator } from "../models/Simulator";
 import { Favorite } from "../models/Favorite";
 import { DBURL } from "../config";
@@ -12,17 +12,17 @@ import { DBURL } from "../config";
     useUnifiedTopology: true,
   });
 
-  const profile = new Profile({
+  const user = new User({
     name: `String`,
     email: `String`,
     capital: `123`,
     divisa: `String`,
     prefered_cryptocurrency: `String`,
   });
-  await profile.save();
+  await user.save();
 
   const query = { _id: "6093abb3dfd9da1deeae56f2" };
-  const idProfile = await Profile.findOne(query).then((e) => {
+  const idProfile = await User.findOne(query).then((e) => {
     return e?._id;
   });
 

@@ -17,3 +17,10 @@ export type ValidatorErrorObject = {
     msg: string,
     param: object
 }
+
+
+
+export type JwtPayload = {
+    _id: string,
+}
+

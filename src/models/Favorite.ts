@@ -1,18 +1,23 @@
 import mongoose from "mongoose";
+import { UserCollectionName } from ".";
 
 const { Schema } = mongoose;
 
 const schema = new Schema(
   {
-    profile_id: String,
     name: String,
-    favorite1: String,
-    favorite2: String,
-    favorite3: String,
+    favorites: [String],
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: UserCollectionName,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-export const Favorite = mongoose.model("Favorite", schema);
+export const FavoriteCollectionName = "Favorite";
+
+export const Favorite = mongoose.model(FavoriteCollectionName, schema);

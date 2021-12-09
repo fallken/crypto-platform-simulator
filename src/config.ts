@@ -15,4 +15,5 @@ const checkEnv = (envVar: string, defaultValue?: string) => {
 export const PORT: number = parseInt(checkEnv("PORT"), 10);
 export const DBURL: string = checkEnv("DBURL");
 export const ENVIRONMENT: string = checkEnv("ENVIRONMENT", "dev");
+export const JWT_SECRET: string = checkEnv("JWT_SECRET");
 export const CORS_ORIGINS: Array<string> = [ checkEnv("CORS_ORIGIN", "http://localhost:3000") ];

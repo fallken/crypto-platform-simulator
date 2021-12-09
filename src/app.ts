@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import { router as favoriteRouter } from "./routes/favorite.router";
-import { router as profileRouter } from "./routes/profile.router";
+import { router as userRouter } from "./routes/user.router";
 import { router as simulatorRouter } from "./routes/simulator.router";
 import routeNotFound from "./middlewares/RouteNotFound";
 import morgan from "morgan";
@@ -34,13 +34,14 @@ app.use(cors({ origin: CORS_ORIGINS }));
 //routes 
 app.use(favoriteRouter);
 
-app.use(profileRouter);
+app.use(userRouter);
 
 app.use(simulatorRouter);
 
 //if not routes were found
 app.use(routeNotFound);
 
+//handle errors thrown in th application
 app.use((err: ExpressError, req: Request, res: Response, next: NextFunction) => errorHandler(err, req, res, next));
 
 export default app;
