@@ -10,6 +10,7 @@ import jwt from "jsonwebtoken";
 import * as config from "../config";
 
 export class UserService {
+  
   /**
    * @param  {mongoose.Types.ObjectId} id
    * @returns Promise
@@ -20,6 +21,7 @@ export class UserService {
 
     return user;
   }
+
   /**
    * @param  {string} email
    * @returns Promise
@@ -30,6 +32,7 @@ export class UserService {
 
     return user;
   }
+
   /**
    * @param  {userRegisterInput} userData
    * @returns Promise
@@ -48,6 +51,7 @@ export class UserService {
 
     return user;
   }
+
   /**
    * @param  {userLoginInput} credentials
    * @returns Promise
@@ -76,6 +80,7 @@ export class UserService {
 
     return user;
   }
+
   /**
    * @param  {} uid
    * @param  {} expiresIn="365d"

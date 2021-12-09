@@ -22,7 +22,7 @@ export const addSimulator: Array<ValidationChain> = [
     }),
     body("name").isString().isLength({ min: 2 , max:20 }),
     body("cryptocurrency").isString().isLength({ min: 2 , max:10 }),
-    body("currency").isString().isIn(["USD", "EUR"]).withMessage("Currency should be USD or ERU"),
+    body("currency").isString().isIn(["USD", "EUR", "GBP"]).withMessage("Currency should be USD or ERU or GBP"),
     body("divisa").isString().isLength({ min: 2 , max:20 }),
     body("price").isNumeric(),
     body("quantity").isNumeric(),

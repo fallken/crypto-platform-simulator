@@ -29,19 +29,30 @@
     "dev": "nodemon",
     "seed": "ts-node-dev src/scripts/seed.ts",
     "start": "node ./dist",
+    "test": "jest --runInBand ./src/tests",
     "build": "tsc -b"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/jest": "^27.0.3",
     "@types/jsonwebtoken": "^8.5.6",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "eslint": "^7.25.0",
     "jest": "^27.4.3",
+    "mongodb-memory-server": "^8.0.4",
     "nodemon": "^2.0.15",
     "supertest": "^6.1.6",
     "ts-jest": "^27.1.1",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.6"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "4.2.3"
+    }
   }
 }
