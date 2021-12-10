@@ -214,4 +214,4 @@ I only managed to add e2e route tests which is using a real instance of db serve
 
 Faramarz Arsalani - arsalani@outlook.com
 
-Project Link: [https://gitlab.com/fallken/vue-express-url-shortener](https://gitlab.com/fallken/vue-express-url-shortener)
+Project Link: [https://github.com/fallken/crypto-platform-simulator](https://github.com/fallken/crypto-platform-simulator)
