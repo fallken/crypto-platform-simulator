@@ -19,4 +19,4 @@ EXPOSE 3000
 
 ## define the runtime 
 RUN npm run build
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "start"]
