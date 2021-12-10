@@ -13,7 +13,7 @@ import { CORS_ORIGINS, ENVIRONMENT } from "./config";
 
 const app: Application = express();
 
-app.use(morgan(ENVIRONMENT == "dev" ? "tiny" : "default"));
+app.use(morgan(ENVIRONMENT == "dev" ? "combined" : "tiny"));
 // support application/json type post data
 app.use(bodyParser.json());
 // support application/x-www-form-urlencoded post data

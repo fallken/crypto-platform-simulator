@@ -18,6 +18,3 @@ mongoose
     console.log(`Error connecting ${DBURL}`);
     throw err;
   });
-
-
-//myname is esi

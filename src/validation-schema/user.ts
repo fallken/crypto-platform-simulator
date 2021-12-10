@@ -2,7 +2,7 @@ import { body, ValidationChain } from "express-validator";
 import bcrypt from "bcrypt";
 
 export const userRegister: Array<ValidationChain> = [
-  body("name").isString().trim().isLength({ min: 5 }),
+  body("name").isString().trim().isLength({ min: 3 }),
   body("divisa").isString().trim().isLength({ min: 2 }),
   body("nickname").optional().isString().trim().isLength({ min: 3 }),
   body("capital").isNumeric(),
