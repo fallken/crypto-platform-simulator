@@ -1,3 +1,3 @@
 export * from "./User";
-export * from "./Favorite";
+export * from "./Favourite";
 export * from "./Simulator";  

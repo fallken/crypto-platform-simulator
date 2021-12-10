@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import _ from "lodash";
 import { User } from "../models";
 import { Simulator } from "../models/Simulator";
-import { Favorite } from "../models/Favorite";
+import { Favorite } from "../models/Favourite";
 import { DBURL } from "../config";
 import bcrypt from "bcrypt";
 
